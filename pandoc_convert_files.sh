@@ -13,6 +13,7 @@ printf "Input format: "; read input_fmt;
 printf "Output format: "; read output_fmt; 
 echo ""
 
+md_flavours_list=("markdown" "gfm" "markdown_mmd" "markdown_phpextra" "markdown_strict")
 regex_pattern="^.+(\.$input_fmt)$";
 no_of_files_converted=0;
 
@@ -26,7 +27,12 @@ for file in $folder_path/*; do
 	
   if [[ $filename =~ $regex_pattern ]]; then
   	let no_of_files_converted=$no_of_files_converted+1;
-  	pandoc -f $input_fmt -t $output_fmt $file -o "$folder_path/converted_files/${filename%.*}.$output_fmt";
+  	if [[ " ${md_flavours_list[*]} " =~ " ${output_fmt} " ]]; then
+  		pandoc -f $input_fmt -t $output_fmt $file -o "$folder_path/converted_files/${filename%.*}.md";
+	else
+  		pandoc -f $input_fmt -t $output_fmt $file -o "$folder_path/converted_files/${filename%.*}.$output_fmt";
+	fi
+
   	echo "* ${filename} - Done";
   fi
 done
