@@ -1,9 +1,9 @@
 #!/bin/bash
 
 sudo -i logout
-printf "UPDATE TASK\n-------------------------------------------------\n"
+printf "\n===========\nUPDATE TASK\n===========\n"
 sudo apt update
-printf "\n"
-printf "UPGRADE TASK\n-------------------------------------------------\n"
+printf "\n============\nUPGRADE TASK\n============\n"
 sudo apt upgrade
-printf "\nAutomatic update and upgrade finished.\n"
+printf "\n--Automatic apt update and upgrade completed--\n"
+
